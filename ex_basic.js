@@ -3,7 +3,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'masterdetail'
+  database : 'masterdetail' 
 });
 
 connection.connect((err) => {
@@ -11,14 +11,16 @@ connection.connect((err) => {
     console.error(`error connectiong: ${err.stack}`);
     return;
   }
-
   console.log(`connected as id ${connection.threadId}`);
-
 });
 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+connection.query('SELECT 1 + 1 AS solution',  (error, results, fields) => {
   if (error) throw error;
   console.log('The solution is: ', results[0].solution);
 });
 
-connection.end();
+connection.end((err) => {
+  console.log(`connection end `);
+});
+
+//connection.destroy();
